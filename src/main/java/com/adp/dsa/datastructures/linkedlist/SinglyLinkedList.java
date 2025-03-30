@@ -1,18 +1,24 @@
 package com.adp.dsa.datastructures.linkedlist;
 
-import java.util.LinkedList;
+/*
+Boundary conditions
+1. Empty data structure
+2. Single element in the data structure
+3. Adding/removing beginning of data structure
+4. Adding/removing end of the data structure
+5. Working in the middle
 
+
+ */
 public class SinglyLinkedList<E> {
-
     private Node<E> head;
     private Node<E> tail;
     private int size;
     public class Node<E> {
-        E data;
-        Node next;
-
-        public Node(E data) {
-            this.data = data;
+        private E data;
+        private Node<E> next;
+        public Node(E obj) {
+            this.data = obj;
             this.next = null;
         }
     }
@@ -22,11 +28,36 @@ public class SinglyLinkedList<E> {
         this.size = 0;
     }
 
+    /*
+        addFirst
+        ------------
+
+        1. Create new node
+        2. If the list is empty, meaning head is null, the new node becomes both the first and the last node.
+                You set both the head and tail of the list to point to this new node, as it's the only node in the list.
+        3. If the list already has elements, you don't need to change the tail. You only need to update the head.
+                You set the next pointer of the new node to point to the current head (the first node).
+                Then, you set the head of the list to the new node, making it the new first node of the list.
+        4. Increase the size by 1
+     */
+
+    public void addFirst(E value) {
+        Node<E> newNode = new Node<E>(value);
+        if (isEmpty()) {
+            head = tail = newNode;
+        } else {
+            // Order of these line matters
+            newNode.next = head;
+            head = newNode;
+        }
+        size++;
+    }
+
     // Method to add a node at the end of the list
     public void addLast(E value) {
-        Node newNode = new Node(value);
+        Node<E> newNode = new Node<E>(value);
 
-        // Edge case 1: Add to an empty list
+        // Case 1: Add to an empty list
         if (isEmpty()) {
             head = tail = newNode;  // List is empty, both head and tail point to the new node
         } else {
@@ -35,6 +66,24 @@ public class SinglyLinkedList<E> {
         }
 
         size++;  // Increase the size of the list
+    }
+
+    public void addLastWithoutTail(E value) {
+        Node<E> newNode = new Node<E>(value);
+
+        // Case 1 - list is empty
+        if (isEmpty()) {
+            head = newNode;
+            size++;
+            return;
+        }
+
+        // Case 2 - list is not empty, we need to reach to the end of the list by using temp pointer
+        Node<E> temp = head;
+        while (temp.next != null)
+            temp = temp.next;
+        temp.next = newNode;
+        size++;
     }
 
     // Method to remove the first node from the linked list
@@ -60,7 +109,7 @@ public class SinglyLinkedList<E> {
 
     // Check if the list is empty
     public boolean isEmpty() {
-        return size == 0;
+        return head == null;
     }
 
     // Method to print the entire linked list
