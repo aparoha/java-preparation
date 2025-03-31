@@ -87,20 +87,52 @@ public class SinglyLinkedList<E> {
     }
 
     // Method to remove the first node from the linked list
-    public void removeFirst() {
-        if (head == null) {  // Case 1: List is empty
-            System.out.println("List is empty, nothing to remove.");
-            return;
+    public E removeFirst() {
+        // Case 1: List is empty
+        if (head == null) {
+            return null;
         }
+        E result = head.data;
 
-        if (head == tail) {  // Case 2: Only one node in the list
+        // Case 2: Only one node in the list
+        if (head == tail) {
             head = tail = null;  // The list becomes empty after removal
         } else {  // Case 3: Multiple nodes in the list
             head = head.next;  // Move the head pointer to the next node
         }
 
         size--;  // Decrease the size of the list
+
+        return result;
     }
+
+    public E removeLast() {
+        // Case 1: List is empty
+        if (head == null) {
+            return null;
+        }
+
+        // Case 2: Only one node in the list
+        if (head == tail)
+            return removeFirst();
+
+        // Case 3: multiple nodes in the list - 2 pointers approach
+        Node<E> current = head;
+        Node<E> previous = null;
+        while (current != tail) {
+            //Order is important
+            previous = current;
+            current = current.next;
+        }
+        previous.next = null;
+        tail = previous;
+        size--;
+        return current.data;
+    }
+
+//    public E remove(E obj) {
+//
+//    }
 
     // Get the size of the list
     public int getSize() {
