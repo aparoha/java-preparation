@@ -8,6 +8,11 @@ Boundary conditions
 4. Adding/removing end of the data structure
 5. Working in the middle
 
+Important
+--------------
+
+Stop at last node --> while(temp.next != null)
+Stop past the last node --> while(temp != null)
 
  */
 public class SinglyLinkedList<E> {
@@ -130,9 +135,67 @@ public class SinglyLinkedList<E> {
         return current.data;
     }
 
-//    public E remove(E obj) {
-//
-//    }
+    public E remove(E obj) {
+        if (obj == null || head == null) {
+            return null; // Early exit for null object or empty list
+        }
+
+        Node<E> current = head;
+        Node<E> previous = null;
+        Comparable<E> comparableObj = (Comparable<E>) obj;
+
+        while (current != null) {
+            // Check if matching node found
+            if (comparableObj.compareTo(current.data) == 0) {
+                // Case 1 = Found node is first node
+                if (current == head) {
+                    return removeFirst();
+                }
+                // Case 2 = Found node is the last node
+                if (current == tail) {
+                    return removeLast();
+                }
+                // Case 3 = Found node is in middle of first and last node
+                previous.next = current.next;  // Bypass the node
+                size--;
+                return current.data;
+            }
+            // Keep moving until
+            previous = current;
+            current = current.next;
+        }
+        return null; // Object not found
+    }
+
+    public boolean contains(E obj) {
+        if (obj == null || head == null) {
+            return false; // Early exit for null object or empty list
+        }
+
+        Node<E> current = head;
+        Comparable<E> comparableObj = (Comparable<E>) obj;
+
+        while (current != null) {
+            // Check if matching node found
+            if (comparableObj.compareTo(current.data) == 0) {
+                return true;
+            }
+            current = current.next;
+        }
+        return false; // Object not found
+    }
+
+    public E peekFirst() {
+        if (head == null)
+            return null;
+        return head.data;
+    }
+
+    public E peekLast() {
+        if (tail == null)
+            return null;
+        return tail.data;
+    }
 
     // Get the size of the list
     public int getSize() {
@@ -156,9 +219,15 @@ public class SinglyLinkedList<E> {
 
     public static void main(String[] args) {
         SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
-        singlyLinkedList.addLast(1);
-        singlyLinkedList.addLast(2);
-        singlyLinkedList.addLast(3);
+        int n = 10;
+        for (int i =0; i < n; i++)
+            singlyLinkedList.addFirst(i);
+        singlyLinkedList.printList();
+        for (int i =n - 1; i > 0; i--)
+            singlyLinkedList.removeFirst();
+        singlyLinkedList.printList();
+        for (int i =0; i <= n; i++)
+            singlyLinkedList.removeLast();
         singlyLinkedList.printList();
     }
 
