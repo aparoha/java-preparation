@@ -46,8 +46,13 @@ Since the count for every letter is zero, "anagram" and "nagaram" are anagrams.
 This function efficiently checks if two words are anagrams using an array instead of sorting, making it faster (O(n) time complexity instead of O(n log n) with sorting).
 
  */
-public class ValidAnagram {
+public class _02_ValidAnagram {
 
+    /*
+    a word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman
+
+    If the frequency of every character matches in both strings, then the strings are anagrams.
+     */
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) {
             return false;

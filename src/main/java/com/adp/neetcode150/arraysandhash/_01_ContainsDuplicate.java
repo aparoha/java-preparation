@@ -33,12 +33,12 @@ Input: nums = [1,1,1,3,3,4,3,2,4,2]
 
 Output: true
  */
-public class ContainsDuplicate {
+public class _01_ContainsDuplicate {
 
     public boolean containsDuplicate(int[] nums) {
         if(nums.length == 0)
             return false;
-        HashSet<Integer> seen = new HashSet<Integer>();
+        HashSet<Integer> seen = new HashSet<>();
         for(int num : nums) {
             if(seen.contains(num))
                 return true;

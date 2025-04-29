@@ -70,7 +70,7 @@ Stored under this key: ["eat"]
 "bat" → New key → Stored separately ["bat"]
 
  */
-public class GroupAnagrams {
+public class _03_GroupAnagrams {
 
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> res = new HashMap<>();
@@ -86,6 +86,7 @@ public class GroupAnagrams {
                 count[c - 'a']++;
             }
             //This converts the count array into a string, such as "[1, 0, 1, 0, ..., 1, 0, 0]", so it can be used as a key in the map.
+            //Grouping words of same frequency array
             String key = Arrays.toString(count);
             res.putIfAbsent(key, new ArrayList<>());
             res.get(key).add(s);
