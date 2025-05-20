@@ -3,7 +3,7 @@ package com.adp.companies.bloomberg;
 import java.util.HashMap;
 import java.util.Map;
 
-public class _01_UndergroundSystem {
+public class _36_UndergroundSystem {
 
     private final Map<Integer, CheckinDetail> checkInMap = new HashMap<>();
     private final Map<StationPair, TripDetail> travelTimes = new HashMap<>();
@@ -48,7 +48,7 @@ public class _01_UndergroundSystem {
     }
 
     public static void main(String[] args) {
-        _01_UndergroundSystem undergroundSystem = new _01_UndergroundSystem();
+        _36_UndergroundSystem undergroundSystem = new _36_UndergroundSystem();
         undergroundSystem.checkIn(10, "L", 3);
         undergroundSystem.checkOut(10, "P", 8);
         double avgTime = undergroundSystem.getAverageTime("L", "P");
